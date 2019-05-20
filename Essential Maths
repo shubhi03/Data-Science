@@ -1,0 +1,23 @@
+If you want to do data science, you’re going to have to deal with math. If you’ve completed a math degree or some other degree that provides an emphasis on quantitative skills,
+In this post, we’re going to explore what it means to do data science and talk about just how much math you need to know to get started.
+Learning statistics is a great start, but data science also uses algorithms to make predictions. 
+These algorithms are called machine learning algorithms and there are literally hundreds of them. 
+Covering how much math is needed for every type of algorithm in depth is not within the scope of this post, 
+I will discuss how much math you need to know for each of the following commonly-used algorithms:
+1-Linear Regression,2-Logistic Regression,3-Naive Bayes,4-Neural Networks,5-K-Means clustering,6-Decision Trees.
+
+1-LINEAR REGRESSION
+
+Linear regression is the most basic type of regression. 
+It allows us to understand the relationships between two continuous variables.In the case of simple linear regression, this means taking a set of data points and plotting a trend line that can be used to make predictions about the future.
+That mathematical function can then be used to make predictions about expected future results in DataScience Mmathematical functions are referred to as models. 
+In the case of linear regression, the model can be expressed as:
+
+                  y = a0 + a1x1 + a2x2 +.........anxn, 
+where a0, a1,...an,  represent the parameter values specific to the data set x1, x2,....xn, represent the feature columns we choose to use in out model,
+and y represents the target column.
+As the Linear Regression is also Called as BESTFIT LINE.
+To find the optimal parameters for a linear regression model, we want to minimize the model’s residual sum of squares. 
+Residual is often referred to as the error and it describes the difference between the predicted values and the true values. 
+The formula for the residual sum of squares can be expressed as:             
+                 
