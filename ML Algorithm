@@ -1,0 +1,100 @@
+Linear Regression-the 1st algo used to predict numerical prediction
+
+
+
+import numpy as np
+import matplotlib.pyplot as plt
+from sklearn.model_selection import train_test_split
+from sklearn.linear_model import LinearRegression
+import pandas as pd
+
+
+dataset = pd.read_csv('/home/azad/Data_Science_Courses/01_DataScience-20190528T065230Z-001/01_DataScience/Datasets/50-Startups.csv')
+
+X = dataset.iloc[:, :-2].values
+X
+y = dataset.iloc[:, 4].values
+y
+
+x = dataset.iloc[:, 0].values
+plt.scatter(x,y,label='',color='k',s=100)
+plt.xlabel('R&D')
+plt.ylabel('Profit')
+plt.title('Profit vs R&D Spend')
+plt.legend()
+plt.show()
+
+x = dataset.iloc[:, 1].values
+plt.scatter(x,y,label='',color='k',s=100)
+plt.xlabel('admin')
+plt.ylabel('Profit')
+plt.title('Profit vs R&D Spend')
+plt.legend()
+plt.show()
+
+x = dataset.iloc[:, 2].values
+plt.scatter(x,y,label='',color='k',s=100)
+plt.xlabel('market')
+plt.ylabel('Profit')
+plt.title('Profit vs R&D Spend')
+plt.legend()
+plt.show()
+
+x = dataset.iloc[:, 3].values
+plt.scatter(x,y,label='',color='k',s=100)
+plt.xlabel('state')
+plt.ylabel('Profit')
+plt.title('Profit vs R&D Spend')
+plt.legend()
+plt.show()
+
+dataset.boxplot(column='Profit',by='State')
+plt.show()
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.30, random_state = 0)
+
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
+
+
+y_pred = regressor.predict(X_test)
+
+
+
+
+from sklearn.preprocessing import LabelEncoder
+from sklearn.preprocessing import OneHotEncoder
+
+dataset2 = ['Pizza','Burger','Bread','Bread','Bread','Burger','Samosa','Pizza','Burger','Samosa']
+values = np.array(dataset2)
+print(values)
+label_encoder = LabelEncoder()
+integer_encoded = label_encoder.fit_transform(values)
+print(integer_encoded)
+onehot = OneHotEncoder(sparse=False)
+integer_encoded = integer_encoded.reshape(len(integer_encoded),1)
+onehot_encoded = onehot.fit_transform(integer_encoded)
+print(onehot_encoded)
+
+
+X = dataset.iloc[:, :-1].values
+
+
+labelencoder = LabelEncoder()
+
+X[:, 3] = labelencoder.fit_transform(X[:, 3])
+X
+
+onehotencoder = OneHotEncoder(categorical_features = [3])
+X = onehotencoder.fit_transform(X).toarray()
+X
+
+# Avoiding the Dummy Variable Trap
+X = X[:, 1:]
+X
+
+
+X_train, X_test, y_train, y_test = train_test_split(X, y, test_size = 0.30, random_state = 0)
+
+regressor = LinearRegression()
+regressor.fit(X_train, y_train)
