@@ -1,0 +1,93 @@
+import pandas as pd
+import numpy as np
+import matplotlib.pyplot as plt
+
+data = pd.read_csv('/home/azad/Data_Science_Courses/01_DataScience-20190528T065230Z-001/01_DataScience/Datasets/diabetes2.csv')
+
+data.info()
+
+array = data.values
+array
+type(array)
+X = array[:,0:8] # ivs for train
+
+y = array[:,8] # dv
+
+
+test_size = 0.33
+from sklearn.model_selection import train_test_split
+#pip install -U scikit-learn
+X_train,X_test,y_train,y_test = train_test_split(X,y,test_size=test_size)
+
+print('Partitioning Done!')
+print(y[:10])
+
+from sklearn.tree import DecisionTreeClassifier
+from sklearn import metrics
+
+model = DecisionTreeClassifier()
+model.fit(X_train,y_train)
+prediction = model.predict(X_test)
+outcome = y_test
+
+print(metrics.accuracy_score(outcome,prediction))
+print(metrics.confusion_matrix(y_test,prediction)) 
+print(model.score(X_test,y_test))
+
+expected = y_test
+predicted = prediction
+conf = metrics.confusion_matrix(expected, predicted)
+
+import seaborn as sns
+label = ["0","1"]
+sns.heatmap(conf, annot=True, xticklabels=label, yticklabels=label)
+
+#Feature Importance DecisionTreeClassifier
+importance = model.feature_importances_
+indices = np.argsort(importance)[::-1]
+feature = data[data.columns[0:8]]
+feat_names = data.columns[0:8]
+print(feat_names)
+
+print("DecisionTree Feature ranking:")
+
+print(feature.shape[1])
+
+for f in range(feature.shape[1]):
+    print("%d. feature %s (%f)" % (f + 1, feat_names[indices[f]], importance[indices[f]]))
+plt.figure(figsize=(15,5))
+plt.title("DecisionTree Feature importances")
+plt.bar(range(feature.shape[1]), importance[indices], color="y", align="center")
+plt.xticks(range(feature.shape[1]), feat_names[indices])
+plt.xlim([-1, feature.shape[1]])
+plt.show()
+print(metrics.accuracy_score(outcome,prediction))
+
+
+
+decision_tree = DecisionTreeClassifier(max_depth = 4)
+decision_tree.fit(X_train, y_train)
+y_pred = decision_tree.predict(X_test)
+cm_df = pd.DataFrame(metrics.confusion_matrix(y_test,y_pred).T)
+cm_df.index.name = 'Predicted'
+cm_df.columns.name = 'True'
+print(cm_df)
+
+print(metrics.classification_report(y_test, y_pred))
+print(decision_tree.score(X_test,y_test))
+
+
+decision_tree = DecisionTreeClassifier(max_depth = 3)
+decision_tree.fit(X_train, y_train)
+y_pred = decision_tree.predict(X_test)
+cm_df = pd.DataFrame(metrics.confusion_matrix(y_test,y_pred).T)
+cm_df.index.name = 'Predicted'
+cm_df.columns.name = 'True'
+print(cm_df)
+
+print(metrics.classification_report(y_test, y_pred))
+print(decision_tree.score(X_test,y_test))
+ Tree-Used for classification problem.it works for both categorical and continous dependent variables
+
+
+
