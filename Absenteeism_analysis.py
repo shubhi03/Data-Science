@@ -1,3 +1,9 @@
+Absenteesim is a Project Where one have to find that how much Employee are going to take off and of which 
+Gender will be the most You can download the 
+Dataset given from Kaggle.That is of Office Record and Name is MFGEmployees4.csv
+or frm y Account Just Type the my Name Shubham Hajela and get various datasets 
+
+
 #Loading important libraries.
 
 import numpy as np
